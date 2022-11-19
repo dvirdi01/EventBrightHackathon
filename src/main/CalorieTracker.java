@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -173,7 +175,7 @@ public class CalorieTracker {
         FlowLayout helperLayout = new FlowLayout(FlowLayout.LEADING);
         helperPanel2.setBackground(new Color(238, 238, 238));
         helperPanel2.setLayout(helperLayout);
-        helperPanel2.setPreferredSize(new Dimension(100, 35));
+        helperPanel2.setPreferredSize(new Dimension(100, 335));
         helperPanel2.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 
         helperPanel2.add(addButton);
@@ -193,12 +195,33 @@ public class CalorieTracker {
     }
 
     private void performDeleteButtonTask() {
+
+
     }
 
     private void performModifyButtonTask() {
     }
 
     private void performAddButtonTask() {
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == addButton) {
+
+                    String date;
+                    String food;
+
+                    date = dateField.getText();
+                    food = foodfield.getText();
+
+                    logRowComponents = new String[]{date, food};
+                    loggingTableModel.addRow(logRowComponents);
+
+                    dateField.setText("");
+                    foodfield.setText("");
+                }
+            }
+        });
     }
 
 
