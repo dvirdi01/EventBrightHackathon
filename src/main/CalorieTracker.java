@@ -26,7 +26,9 @@ public class CalorieTracker {
     JButton deleteButton = new JButton("Delete");
 
     //TextFields
-    JTextField itemName = new JTextField();
+    JTextField foodfield = new JTextField();
+    JTextField dateField = new JTextField();
+
 
     //JTables
     JTable loggingTable;
@@ -110,19 +112,21 @@ public class CalorieTracker {
         mainPanelLabel.setFont(new Font("Verdana", Font. BOLD, 25));
         mainPanel.add(mainPanelLabel);
         displayLeftPanel();
+
         //displayButtons();
 
         topPanel.setVisible(true);
         mainFrame.add(topPanel, borderLayout.NORTH);
         mainPanel.setVisible(true);
         displayLogTable();
+        displayButtons();
         mainFrame.add(mainPanel, borderLayout.CENTER);
     }
 
     private void displayLeftPanel() {
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         leftPanel.setBackground(new Color(142, 239, 138));
-        leftPanel.setPreferredSize(new Dimension(200, 50));
+        leftPanel.setPreferredSize(new Dimension(150, 50));
 
         // create labels
         JLabel dateLabel = new JLabel("Date(D/M/Y)");
@@ -133,13 +137,56 @@ public class CalorieTracker {
         leftPanel.add(dateLabel);
         leftPanel.add(Box.createRigidArea(new Dimension(15, 10)));
         leftPanel.add(foodLabel);
-
         //-----------------------------------------------------------------
+
+        displayTextFields();
         leftPanel.setVisible(true);
         mainFrame.add(leftPanel, borderLayout.WEST);
     }
 
+    private void displayTextFields() {
+        JPanel helperPanel1 = new JPanel();
+
+        BoxLayout helperLayout = new BoxLayout(helperPanel1, BoxLayout.Y_AXIS);
+        helperPanel1.setBackground(new Color(142, 239, 138));
+        helperPanel1.setLayout(helperLayout);
+        helperPanel1.setPreferredSize(new Dimension(125, 50));
+
+        dateField.setBorder(BorderFactory.createLoweredBevelBorder());
+        foodfield.setBorder(BorderFactory.createLoweredBevelBorder());
+
+        helperPanel1.add(Box.createRigidArea(new Dimension(0, 10)));
+        helperPanel1.add(dateField);
+        helperPanel1.add(Box.createRigidArea(new Dimension(0, 10)));
+        helperPanel1.add(foodfield);
+        helperPanel1.add(Box.createRigidArea(new Dimension(0, 800)));
+
+
+        //-----------------------------------------------------------------
+        helperPanel1.setVisible(true);
+        mainPanel.add(helperPanel1, new BorderLayout().WEST);
+    }
+
     private void displayButtons() {
+        JPanel helperPanel2 = new JPanel();
+
+        FlowLayout helperLayout = new FlowLayout(FlowLayout.LEADING);
+        helperPanel2.setBackground(new Color(238, 238, 238));
+        helperPanel2.setLayout(helperLayout);
+        helperPanel2.setPreferredSize(new Dimension(100, 35));
+        helperPanel2.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+
+        helperPanel2.add(addButton);
+        helperPanel2.add(modifyButton);
+        helperPanel2.add(deleteButton);
+        performButtonAction();
+
+        //-----------------------------------------------------------------
+        helperPanel2.setVisible(true);
+        mainPanel.add(helperPanel2, new BorderLayout().SOUTH);
+    }
+
+    private void performButtonAction() {
         performAddButtonTask();
         performModifyButtonTask();
         performDeleteButtonTask();
