@@ -91,9 +91,18 @@ public class CalorieTracker {
         topPanel.add(Box.createRigidArea(new Dimension(70, 50)));
         topPanel.add(topPanelLabel);
 
+        BorderLayout centerPanelLayout = new BorderLayout();
+        mainPanel.setLayout(centerPanelLayout);
+        JLabel mainPanelLabel = new JLabel();
+        mainPanelLabel.setText("Include everything else here");
+        mainPanelLabel.setForeground(Color.BLACK);
+        mainPanelLabel.setFont(new Font("Verdana", Font. BOLD, 25));
+        mainPanel.add(mainPanelLabel);
 
         topPanel.setVisible(true);
         mainFrame.add(topPanel, borderLayout.NORTH);
+        mainPanel.setVisible(true);
+        mainFrame.add(mainPanel, borderLayout.CENTER);
     }
 
 }
