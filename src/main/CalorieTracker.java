@@ -195,11 +195,51 @@ public class CalorieTracker {
     }
 
     private void performDeleteButtonTask() {
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!loggingTable.getSelectionModel().isSelectionEmpty()) {
+                    if (e.getSource() == deleteButton) {
 
+                        int selectedRowIndex = loggingTable.getSelectedRow();
+                        int confirmation = JOptionPane.showConfirmDialog(mainPanel,
+                                "Are you sure you want to delete this  entry?",
+                                "Delete Selected", JOptionPane.YES_NO_OPTION);
+                        if (confirmation == JOptionPane.YES_OPTION) {
+                            loggingTableModel.removeRow(loggingTable.getSelectedRow());
+                        }
+                    }
+                }
+            }
+        });
 
     }
 
     private void performModifyButtonTask() {
+        modifyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == modifyButton) {
+                    int selectedRowIndex = loggingTable.getSelectedRow();
+
+                    if (!loggingTable.getSelectionModel().isSelectionEmpty()) {
+                        String newDate = JOptionPane.showInputDialog(mainPanel,
+                                "Enter new Date");
+                        loggingTable.setValueAt(newDate, selectedRowIndex, 0);
+
+                        String newFood = JOptionPane.showInputDialog(mainPanel,
+                                "Enter new food item");
+                        loggingTable.setValueAt(newFood, selectedRowIndex, 1);
+
+                    } else {
+                        JOptionPane.showMessageDialog(mainPanel,
+                                "You must select a row to perform this operation",
+                                "Invalid Row Selection", JOptionPane.DEFAULT_OPTION);
+                    }
+
+                }
+            }
+        });
     }
 
     private void performAddButtonTask() {
