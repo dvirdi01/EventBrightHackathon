@@ -43,6 +43,9 @@ public class CalorieTracker {
 
             @Override
             public void windowOpened(WindowEvent e) {
+                WelcomeGUI welcomeGUI = new WelcomeGUI();
+
+
 
             }
 
